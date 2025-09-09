@@ -1,0 +1,28 @@
+# Archivos bin y obj
+bin/
+obj/
+
+# Archivos de configuración locales
+*.user
+*.suo
+*.csproj.user
+
+# Carpetas de paquetes NuGet
+packages/
+
+# Archivos de build
+*.log
+*.vs/
+*.vscode/
+
+# Archivos temporales
+*.tmp
+*.bak
+
+# Carpetas de publicación
+Publish/
+
+# Otros
+*.db
+*.pdb
+
