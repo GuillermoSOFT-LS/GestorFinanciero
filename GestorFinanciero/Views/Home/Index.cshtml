@@ -2,32 +2,48 @@
     ViewBag.Title = "Home Page";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+@{
+    ViewBag.Title = "Inicio - Gestor Financiero";
+}
+
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container center-align">
+        <br><br>
+        <h1 class="header center blue-text">Bienvenido a Gestor Financiero</h1>
+        <div class="row center">
+            <h5 class="header col s12 light">Administra tus clientes, movimientos y transferencias de forma simple.</h5>
+        </div>
+        <div class="row center">
+            <a href="#features" id="download-button" class="btn-large waves-effect waves-light blue darken-2">Comenzar</a>
+        </div>
+        <br><br>
     </div>
-</main>
+</div>
+
+
+<div class="container" id="features">
+    <div class="section">
+        <div class="row">
+            <div class="col s12 m4 center-align">
+                <i class="material-icons large blue-text">
+                    group
+                </i>
+                <h5>Gestión de Clientes</h5>
+                <p class="light">Registra y organiza la información de todos tus clientes en un solo lugar.</p>
+            </div>
+
+            <div class="col s12 m4 center-align">
+                <i class="material-icons large blue-text">attach_money</i>
+                <h5>Control de Movimientos</h5>
+                <p class="light">Lleva un control detallado de ingresos, egresos y balance financiero.</p>
+            </div>
+
+            <div class="col s12 m4 center-align">
+                <i class="material-icons large blue-text">swap_horiz</i>
+                <h5>Transferencias</h5>
+                <p class="light">Realiza transferencias seguras y rápidas entre tus cuentas.</p>
+            </div>
+        </div>
+    </div>
+</div>
