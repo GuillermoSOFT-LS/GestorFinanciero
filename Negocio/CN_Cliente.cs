@@ -17,5 +17,15 @@ namespace Negocio
         {
             return objcd_cliente.GetAllClients();
         }
+
+        public int InsertClient(CE_Cliente cliente)
+        {
+            return objcd_cliente.InsertClient(cliente);
+        }
+
+        public List<CE_Cliente> SearchClient(string Documento)
+        {
+            return objcd_cliente.SearchClient(Documento);
+        }
     }
 }

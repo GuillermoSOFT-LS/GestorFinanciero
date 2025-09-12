@@ -51,8 +51,8 @@
 
                     const acciones = `
                         <td class='accionesTabla'>
-                          <span class="Badges"><i class="material-icons blue-text text-darken-2" style="cursor:pointer">border_color</i> Editar</span>
-                          <span class="Badges"><i class="material-icons red-text text-darken-2" style="cursor:pointer">delete_forever</i>Eliminar</span>
+                          <button class="Badges" data-target="modalCliente"><i class="material-icons blue-text text-darken-2" style="cursor:pointer">border_color</i></button>
+                          <button class="Badges"><i class="material-icons red-text text-darken-2" style="cursor:pointer">delete_forever</i></button>
                         </td>`;
 
                     return `<tr>${celdas}${acciones}</tr>`;

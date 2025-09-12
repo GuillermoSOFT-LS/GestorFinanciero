@@ -23,5 +23,19 @@ namespace GestorFinanciero.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public JsonResult Insert(CE_Cliente cliente)
+        {
+            var resultado = Cliente.InsertClient(cliente);
+            return Json(new { success = resultado > 0 });
+        }
+
+        public JsonResult SelectClientDocument(string Documento)
+        {
+            List<CE_Cliente> lista = new List<CE_Cliente>();
+            lista = Cliente.SearchClient(Documento);
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -6,11 +6,12 @@ using System.Web.Mvc;
 
 namespace GestorFinanciero.Controllers
 {
-    public class HomeController : Controller
-     {
+    public class CuentaController : Controller
+    {
+        // GET: Cuenta
         public ActionResult Index()
         {
-           return View();
+            return View();
         }
     }
 }

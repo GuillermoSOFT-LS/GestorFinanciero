@@ -3,55 +3,49 @@
     padding-right: 15px;
 }
 
-
 .dl-horizontal dt {
     white-space: normal;
 }
 
+/* Navbar flex */
 .custom-flex {
     display: flex;
-    justify-content: space-around; 
-    align-items: center; 
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 }
 
-.items-Nav{
+.items-Nav {
     display: flex;
     align-items: center;
     margin-left: 20px;
 }
 
-.tableHead{
+    .items-Nav a {
+        color: white !important; /* 🔹 Asegura que se vean los textos */
+        font-weight: 500;
+        margin-left: 5px;
+    }
+
+.tableHead {
     border-radius: 10px 10px 0 0 0;
 }
 
 .Bage {
-    padding: 5px;    
+    padding: 5px;
     border-radius: 5px;
 }
 
-.accionesTabla{
+.accionesTabla {
     display: flex;
     gap: 20px;
 }
 
-.HeadPages {
+.sidenav {
     padding-top: 20px;
-    font-weight: 600;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
-.Badges {
-    display: flex;
-    align-items: center;
-    background-color: azure;
-    gap: 5px;
-}
-
-.TitleModal{
-    display: flex;
-    justify-content:center;
-    text-align: center;
-    padding-bottom: 10px;
+.logo {
+    padding-bottom: 20px;
+    padding-left: 20px;
 }
