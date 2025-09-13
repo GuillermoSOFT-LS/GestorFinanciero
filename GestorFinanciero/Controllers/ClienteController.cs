@@ -37,5 +37,34 @@ namespace GestorFinanciero.Controllers
             lista = Cliente.SearchClient(Documento);
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult Update(CE_Cliente cliente)
+        {
+            try
+            {
+                var resultado = Cliente.UpdateClient(cliente);
+                return Json(new { success = resultado > 0 });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        public JsonResult Remove(int id)
+        {
+            try
+            {
+                var resultado = Cliente.RemoveClient(id);
+                return Json(new { success = resultado > 0 });
+            }
+            catch(Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+            
+        }
+
     }
 }

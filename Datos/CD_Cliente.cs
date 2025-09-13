@@ -124,19 +124,21 @@ namespace Datos
 
         public int Update(CE_Cliente cliente)
         {
-            int resultado;
+            int resultado = 0;
             try
             {
-                using(SqlConnection sqlcon = new SqlConnection(ConnectionDB.conn))
-                    using(SqlCommand cmd = new SqlCommand("SP_UPDATE_CLIENTE", sqlcon))
+                using (SqlConnection sqlcon = new SqlConnection(ConnectionDB.conn))
+                using (SqlCommand cmd = new SqlCommand("SP_UPDATE_CLIENTE", sqlcon))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@Nombre", cliente.Nombre);
-                    cmd.Parameters.AddWithValue("@Documento", cliente.Documento);
-                    cmd.Parameters.AddWithValue("@Correo", cliente.Correo);
-                    cmd.Parameters.AddWithValue("@Telefono", cliente.Telefono);
-                    cmd.Parameters.AddWithValue("@Estado", cliente.Estado);
+                    cmd.Parameters.AddWithValue("@IdCliente", cliente.IdCliente);
+                    cmd.Parameters.AddWithValue("@Nombre", (object)cliente.Nombre ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Documento", (object)cliente.Documento ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Correo", string.IsNullOrEmpty(cliente.Correo) ? (object)DBNull.Value : cliente.Correo);
+                    cmd.Parameters.AddWithValue("@Telefono", string.IsNullOrEmpty(cliente.Telefono) ? (object)DBNull.Value : cliente.Telefono);
+                    cmd.Parameters.Add("@Estado", SqlDbType.Bit).Value = cliente.Estado;
+
 
                     sqlcon.Open();
                     resultado = cmd.ExecuteNonQuery();
@@ -149,8 +151,30 @@ namespace Datos
             }
 
             return resultado;
+        }
 
+        public int DeleteClient(int id)
+        {
+            int resultado;
 
+            try
+            {
+                using(SqlConnection sqlcon = new SqlConnection(ConnectionDB.conn))
+                    using(SqlCommand cmd = new SqlCommand("EliminarCliente", sqlcon))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("IdCliente", id);
+                    sqlcon.Open();
+                    resultado = cmd.ExecuteNonQuery();
+                    sqlcon.Close();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return resultado;
         }
     }
 }

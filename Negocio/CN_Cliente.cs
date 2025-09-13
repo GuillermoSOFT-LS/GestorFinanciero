@@ -27,5 +27,15 @@ namespace Negocio
         {
             return objcd_cliente.SearchClient(Documento);
         }
+      
+        public int UpdateClient(CE_Cliente cliente)
+        {
+            return objcd_cliente.Update(cliente);
+        }
+
+        public int RemoveClient(int id)
+        {
+            return objcd_cliente.DeleteClient(id);
+        }
     }
 }

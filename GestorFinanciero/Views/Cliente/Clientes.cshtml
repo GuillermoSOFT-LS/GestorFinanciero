@@ -3,21 +3,32 @@
 }
 
 <h2 class="blue-text">Clientes</h2>
+<div class="col s4 left-align">
+    <button data-target="modalCliente" class="btn modal-trigger blue">
+        <i class="material-icons left">person_add</i> Nuevo Cliente
+    </button>
+</div>
 
 <div class="row">
-    <!-- Botón Nuevo Cliente -->
-    <div class="col s6 left-align">
-        <button data-target="modalCliente" class="btn modal-trigger blue">
-            <i class="material-icons left">person_add</i> Nuevo Cliente
-        </button>
-    </div>
+    <div class="row">
+        <p class="content-Filter">Filtrar Por:</p>
+        <!-- Filtro de estado Cliente -->
+        <div class="col s2 left-align">
+            <select id="Filtro">
+                <option value="2">Todos</option>
+                <option value="1">Activo</option>
+                <option value="0">Inactivo</option>
+            </select>
+        </div>
+        <div class="col s4"></div>
 
-    <!-- Input de búsqueda -->
-    <div class="col s6 right-align">
-        <div class="input-field" style="max-width:300px; display:inline-block; width:100%;">
-            <i class="material-icons prefix">search</i>
-            <input id="search" type="text" class="validate">
-            <label for="search">Buscar cliente</label>
+        <!-- Input de búsqueda -->
+        <div class="col s6 right-align">
+            <div class="input-field" style="max-width:300px; display:inline-block; width:100%;">
+                <i class="material-icons prefix">search</i>
+                <input id="search" type="text" class="validate">
+                <label for="search">Buscar cliente</label>
+            </div>
         </div>
     </div>
 </div>
@@ -73,6 +84,53 @@
     </div>
 </div>
 
+<!-- Modal Editar Cliente -->
+<div id="modalEditCliente" class="modal">
+    <div class="modal-content">
+        <h4 class="blue-text">Editar Cliente</h4>
+
+        <input type="hidden" id="editIdCliente" />
+
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">person</i>
+                <input type="text" id="editNombre">
+                <label for="editNombre">Nombre Completo</label>
+            </div>
+
+            <div class="input-field col s6">
+                <i class="material-icons prefix">chrome_reader_mode</i>
+                <input type="text" id="editDocumento" placeholder="(ej:001-1234567-8">
+                <label for="editDocumento">Documento de identidad)</label>
+            </div>
+
+            <div class="input-field col s5">
+                <i class="material-icons prefix">mail</i>
+                <input type="text" id="editCorreo">
+                <label for="editCorreo">Correo</label>
+            </div>
+
+            <div class="input-field col s5">
+                <i class="material-icons prefix">perm_contact_calendar</i>
+                <input type="text" id="editTelefono">
+                <label for="editTelefono">Teléfono</label>
+            </div>
+
+            <div class="input-field col s2">
+                <select id="editEstado">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+                <label for="editEstado">Estado</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect red white-text btn-flat">Cancelar</a>
+        <a href="#!" class="modal-close waves-effect blue white-text btn-flat" onclick="ActualizarCliente()">Guardar cambios</a>
+    </div>
+</div>
 
 <div id="TablaClientes"></div>
 
@@ -81,7 +139,6 @@
     var UrlShow = '@Url.Action("Index", "Cliente")';
     var UrlInsert = '@Url.Action("Insert", "Cliente")';
     var UrlSelectClient = '@Url.Action("SelectClientDocument", "Cliente")';
+    var UrlUpdate = '@Url.Action("Update", "Cliente")';
 </script>
 <script src="~/Scripts/JS/Clientes.js"></script>
-
-

@@ -8,7 +8,7 @@
                 `<div class="input-group mb-3" >
                     <input type="text" class="form-control" id="${objBusqueda.inputText}" placeholder="${objBusqueda.placeolder}">
                         <button class="btn btn-primary" type="button" id="${objBusqueda.btnId}">Buscar</button>
-                </div>`: '';
+                </div>` : '';
 
             // Cabecera de la tabla
             const cabecera = objConfiguration.cabeceras
@@ -43,16 +43,21 @@
                                 return `<td>${fechaFormateada}</td>`;
                             }
 
-
-
                             return `<td>${valor}</td>`;
                         })
                         .join('');
 
                     const acciones = `
                         <td class='accionesTabla'>
-                          <button class="Badges" data-target="modalCliente"><i class="material-icons blue-text text-darken-2" style="cursor:pointer">border_color</i></button>
-                          <button class="Badges"><i class="material-icons red-text text-darken-2" style="cursor:pointer">delete_forever</i></button>
+                          <i class="material-icons blue-text text-darken-2" style="cursor:pointer"
+                             onclick="EditarCliente(${fila.IdCliente}, '${fila.Nombre}', '${fila.Documento}', '${fila.Correo}', '${fila.Telefono}', ${fila.Estado ? 1 : 0})">
+                             border_color
+                          </i>
+
+                          <i class="material-icons red-text text-darken-2" style="cursor:pointer"
+                             onclick="EliminarCliente(${fila.IdCliente})">
+                             delete_forever
+                          </i>
                         </td>`;
 
                     return `<tr>${celdas}${acciones}</tr>`;
@@ -62,17 +67,15 @@
             // Tabla completa
             const tabla = `
             ${SeccionBusqueda}
-                <table class="highlight responsive-table tableHead">
+                <table class="highlight responsive-table">
                     <thead class="blue white-text tableHead">
-                        <tr>${cabecera} <th>Acciones</th></tr>
+                        <tr>${cabecera}</tr>
                     </thead>
                     <tbody class="white black-text">
                         ${filas}
-                        
                     </tbody>
                 </table>`;
 
             document.getElementById(objConfiguration.Id).innerHTML = tabla;
         });
 }
-
