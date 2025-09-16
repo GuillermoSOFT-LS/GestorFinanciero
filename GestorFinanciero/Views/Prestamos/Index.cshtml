@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="blue-text">Préstamos</h2>
+
+<div class="row">
+
+    <div class="input-field col s6">
+        <i class="material-icons prefix">attach_money</i>
+        <input type="text" id="Monto">
+        <label for="Monto">Monto</label>
+    </div>
+
+    <div class="input-field col s6">
+        <i class="material-icons prefix">schedule</i>
+        <input type="text" id="Frecuencia">
+        <label for="Frecuencia">Frecuencia</label>
+    </div>
+
+    <div class="input-field col s6">
+        <i class="material-icons prefix">event</i>
+        <input type="text" id="Tiempo">
+        <label for="Tiempo">Plazo</label>
+    </div>
+
+    <div class="input-field col s5">
+        <i class="material-icons prefix">percent</i>
+        <input type="text" id="Interes">
+        <label for="Interes">Interés</label>
+    </div>
+
+    <div class="input-field col s5">
+        <i class="material-icons prefix">payments</i>
+        <input type="text" id="Cuota">
+        <label for="Cuota">Cuota</label>
+    </div>
+</div>
+
+<a href="#!" class="modal-close waves-effect blue white-text btn-flat" id="btnCalcularCuota">Calcular cuota</a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        document.getElementById("btnCalcularCuota").addEventListener("click", function () {
+            var Datos = {
+                pl: Number(document.getElementById("Tiempo").value),
+                Monto: Number(document.getElementById("Monto").value),
+                Fre: document.getElementById("Frecuencia").value,
+                In: Number(document.getElementById("Interes").value),
+                Cu: Number(document.getElementById("Cuota").value)
+            };
+
+            if (document.getElementById("Monto").value === "" ||
+                document.getElementById("Frecuencia").value === "" ||
+                document.getElementById("Tiempo").value === "" ||
+                document.getElementById("Interes").value === "" ||
+                document.getElementById("Cuota").value === "") {
+
+                alert("No puedes dejar campos vacíos");
+                return;
+            }
+
+            // Validar tipos de datos
+            if (isNaN(Datos.Monto) || isNaN(Datos.pl) || isNaN(Datos.In) || isNaN(Datos.Cu)) {
+                alert("Los campos de monto, plazo, interés y cuota deben ser números");
+            } else {
+                alert(`
+                    Datos Obtenidos:
+                    Monto: ${Datos.Monto}
+                    Frecuencia: ${Datos.Fre}
+                    Plazo: ${Datos.pl}
+                    Interés: ${Datos.In}
+                    Cuota: ${Datos.Cu}
+                `);
+            }
+        });
+    });
+</script>

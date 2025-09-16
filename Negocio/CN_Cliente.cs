@@ -37,5 +37,11 @@ namespace Negocio
         {
             return objcd_cliente.DeleteClient(id);
         }
+
+        public CE_Cliente GetClientById(int id)
+        {
+            return objcd_cliente.GetClientById(id);
+        }
+
     }
 }

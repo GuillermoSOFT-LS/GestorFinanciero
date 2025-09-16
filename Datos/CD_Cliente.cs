@@ -38,7 +38,6 @@ namespace Datos
                             FechaRegistro = Convert.ToDateTime(sdr["FechaRegistro"])
                         });
                     }
-
                     sqlcon.Close();
                 }
             }
@@ -62,7 +61,7 @@ namespace Datos
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("Documento", Documento);
+                    cmd.Parameters.AddWithValue("@Documento", Documento);
 
                     sqlcon.Open();
 
@@ -84,12 +83,7 @@ namespace Datos
                     sqlcon.Close();
                 }
             }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
+            catch (Exception) { throw; }
             return lista;
         }
 
@@ -115,10 +109,7 @@ namespace Datos
                     sqlcon.Close();
                 }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception){throw;}
             return resultado;
         }
 
@@ -138,18 +129,12 @@ namespace Datos
                     cmd.Parameters.AddWithValue("@Correo", string.IsNullOrEmpty(cliente.Correo) ? (object)DBNull.Value : cliente.Correo);
                     cmd.Parameters.AddWithValue("@Telefono", string.IsNullOrEmpty(cliente.Telefono) ? (object)DBNull.Value : cliente.Telefono);
                     cmd.Parameters.Add("@Estado", SqlDbType.Bit).Value = cliente.Estado;
-
-
                     sqlcon.Open();
                     resultado = cmd.ExecuteNonQuery();
                     sqlcon.Close();
                 }
             }
-            catch (Exception)
-            {
-                throw;
-            }
-
+            catch (Exception){throw;}
             return resultado;
         }
 
@@ -170,11 +155,47 @@ namespace Datos
                     sqlcon.Close();
                 }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception){throw;}
             return resultado;
         }
+
+        public CE_Cliente GetClientById(int id)
+        {
+            CE_Cliente cliente = null;
+
+            try
+            {
+                using (SqlConnection sqlcon = new SqlConnection(ConnectionDB.conn))
+                using (SqlCommand cmd = new SqlCommand("SP_GET_CLIENT_BY_ID", sqlcon))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@IdCliente", id);
+
+                    sqlcon.Open();
+
+                    SqlDataReader sdr = cmd.ExecuteReader();
+
+                    if (sdr.Read())
+                    {
+                        cliente = new CE_Cliente
+                        {
+                            IdCliente = Convert.ToInt32(sdr["IdCliente"]),
+                            Nombre = sdr["Nombre"].ToString(),
+                            Documento = sdr["Documento"].ToString(),
+                            Correo = sdr["Correo"].ToString(),
+                            Telefono = sdr["Telefono"].ToString(),
+                            Estado = Convert.ToBoolean(sdr["Estado"]),
+                            FechaRegistro = Convert.ToDateTime(sdr["FechaRegistro"])
+                        };
+                    }
+
+                    sqlcon.Close();
+                }
+            }
+            catch (Exception) { throw; }
+
+            return cliente;
+        }
+
     }
 }

@@ -10,41 +10,24 @@ namespace GestorFinanciero.Controllers
 {
     public class ClienteController : Controller
     {
-        CN_Cliente Cliente = new CN_Cliente();
-
-        public JsonResult Index()
+        
+        CN_Cliente Cliente = new CN_Cliente();   
+                
+        public ActionResult Clientes()
         {
             List<CE_Cliente> lista = new List<CE_Cliente>();
             lista = Cliente.GetAllClient();
-            return Json(lista, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult Clientes()
-        {
-            return View();
+            return View(lista);
         }
 
         [HttpPost]
-        public JsonResult Insert(CE_Cliente cliente)
-        {
-            var resultado = Cliente.InsertClient(cliente);
-            return Json(new { success = resultado > 0 });
-        }
-
-        public JsonResult SelectClientDocument(string Documento)
-        {
-            List<CE_Cliente> lista = new List<CE_Cliente>();
-            lista = Cliente.SearchClient(Documento);
-            return Json(lista, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public JsonResult Update(CE_Cliente cliente)
+        public ActionResult Insert(CE_Cliente cliente, string Estado)
         {
             try
             {
-                var resultado = Cliente.UpdateClient(cliente);
-                return Json(new { success = resultado > 0 });
+                cliente.Estado = Estado == "1" ? true : false;
+                var resultado = Cliente.InsertClient(cliente);
+                return RedirectToAction("Clientes");
             }
             catch (Exception ex)
             {
@@ -52,18 +35,49 @@ namespace GestorFinanciero.Controllers
             }
         }
 
-        public JsonResult Remove(int id)
+        [HttpPost]
+        public ActionResult Remove(int id)
         {
             try
             {
                 var resultado = Cliente.RemoveClient(id);
-                return Json(new { success = resultado > 0 });
+                return RedirectToAction("Clientes");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Json(new { success = false, message = ex.Message });
             }
-            
+        }
+
+
+        public ActionResult SelectClientDocument(string Documento)
+        {
+            List<CE_Cliente> lista = new List<CE_Cliente>();
+            lista = Cliente.SearchClient(Documento);
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public ActionResult Update(CE_Cliente cliente, string Estado)
+        {
+            try
+            {
+                cliente.Estado = Estado == "1" ? true : false;
+                var resultado = Cliente.UpdateClient(cliente);
+                return RedirectToAction("Clientes");
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+                return RedirectToAction("Clientes");
+            }
+        }
+
+        public ActionResult GetClientById(int id)
+        {
+            var cliente = Cliente.GetClientById(id);
+            return Json(cliente, JsonRequestBehavior.AllowGet);
         }
 
     }

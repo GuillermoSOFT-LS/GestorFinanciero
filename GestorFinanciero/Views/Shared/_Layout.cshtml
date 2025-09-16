@@ -32,18 +32,23 @@
                 <i class="material-icons">swap_horiz</i>
                 @Html.ActionLink("Transferencias", "", "")
             </li>
+            <li class="items-Nav">
+                <i class="material-icons">
+                    monetization_on
+                </i>
+                @Html.ActionLink("Prestamos", "Index", "Prestamos")
+            </li>
         </ul>
     </nav>
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Gestor Financiero</p>
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
+   
     @RenderSection("scripts", required: false)
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>

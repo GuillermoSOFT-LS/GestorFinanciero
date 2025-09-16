@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CD_Cuenta.cs" />
     <Compile Include="CE_Cliente.cs" />
     <Compile Include="CE_CuentaBancaria.cs" />
     <Compile Include="CE_Movimiento.cs" />

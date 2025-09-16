@@ -1,0 +1,47 @@
+﻿<div id="modalCliente" class="modal">
+    <div class="modal-content">
+        <h4 class="blue-text">Registrar Cliente</h4>
+
+        @using (Html.BeginForm("Insert", "Cliente", FormMethod.Post, new { id = "formInsertCliente" }))
+        {
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">person</i>
+                    <input type="text" id="NombreInsert" name="Nombre" required>
+                    <label for="NombreInsert">Nombre Completo</label>
+                </div>
+
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">chrome_reader_mode</i>
+                    <input type="text" id="DocumentoInsert" name="Documento" required>
+                    <label for="DocumentoInsert">Documento de identidad</label>
+                </div>
+
+                <div class="input-field col s5">
+                    <i class="material-icons prefix">mail</i>
+                    <input type="email" id="CorreoInsert" name="Correo">
+                    <label for="CorreoInsert">Correo</label>
+                </div>
+
+                <div class="input-field col s5">
+                    <i class="material-icons prefix">perm_contact_calendar</i>
+                    <input type="text" id="TelefonoInsert" name="Telefono">
+                    <label for="TelefonoInsert">Teléfono</label>
+                </div>
+
+                <div class="input-field col s2">
+                    <select id="EstadoInsert" name="Estado">
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                    <label for="EstadoInsert">Estado</label>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect red white-text btn-flat">Cancelar</a>
+                <button type="submit" class="waves-effect blue white-text btn-flat">Registrar</button>
+            </div>
+        }
+    </div>
+</div>

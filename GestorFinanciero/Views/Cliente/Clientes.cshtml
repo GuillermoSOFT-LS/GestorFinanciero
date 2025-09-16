@@ -1,144 +1,76 @@
-﻿@{
-    ViewBag.Title = "Clientes";
-}
+﻿@model List<Entidad.CE_Cliente>
 
 <h2 class="blue-text">Clientes</h2>
+
 <div class="col s4 left-align">
     <button data-target="modalCliente" class="btn modal-trigger blue">
         <i class="material-icons left">person_add</i> Nuevo Cliente
     </button>
 </div>
 
-<div class="row">
-    <div class="row">
-        <p class="content-Filter">Filtrar Por:</p>
-        <!-- Filtro de estado Cliente -->
-        <div class="col s2 left-align">
-            <select id="Filtro">
-                <option value="2">Todos</option>
-                <option value="1">Activo</option>
-                <option value="0">Inactivo</option>
-            </select>
-        </div>
-        <div class="col s4"></div>
+@Html.Partial("_FilterCliente")
 
-        <!-- Input de búsqueda -->
-        <div class="col s6 right-align">
-            <div class="input-field" style="max-width:300px; display:inline-block; width:100%;">
-                <i class="material-icons prefix">search</i>
-                <input id="search" type="text" class="validate">
-                <label for="search">Buscar cliente</label>
-            </div>
-        </div>
-    </div>
+<div id="TablaClientes">
+    <table class="highlight responsive-table">
+        <thead class="blue white-text tableHead">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Documento</th>
+                <th>Correo</th>
+                <th>Telefono</th>
+                <th>Estado</th>
+                <th>Fecha Registro</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="white black-text">
+            @foreach (var cliente in Model)
+            {
+                <tr>
+                    <td>@cliente.IdCliente</td>
+                    <td>@cliente.Nombre</td>
+                    <td>@cliente.Documento</td>
+                    <td>@cliente.Correo</td>
+                    <td>@cliente.Telefono</td>
+                    <td>
+                        @Html.Raw(cliente.Estado
+                           ? "<span class='blue darken-1 white-text Bage'>Activo</span>"
+                           : "<span class='red darken-4 white-text Bage'>Inactivo</span>")
+                    </td>
+                    <td>@cliente.FechaRegistro</td>
+                    <td class="accionesTabla">
+
+                        <!-- Botón Editar -->
+                        <a href="#modalEditCliente" class="modal-trigger blue-text"
+                           onclick="cargarCliente(@cliente.IdCliente)">
+                            <i class="material-icons">border_color</i>
+                        </a>
+
+
+                        <!-- Botón Eliminar -->
+                        @using (Html.BeginForm("Remove", "Cliente", FormMethod.Post))
+                        {
+                            @Html.Hidden("id", cliente.IdCliente)
+                            <button type="submit" class="btn-flat red-text"
+                                    onclick="return confirm(`Eliminar a @cliente.Nombre de la lista de clientes`);">
+                                <i style="font-size:24px;" class="material-icons">delete_forever</i>
+                            </button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
-<!-- Modal Nuevo Cliente -->
-<div id="modalCliente" class="modal">
-    <div class="modal-content">
-        <h4 class="blue-text">Registrar Cliente</h4>
+@Html.Partial("_ModalRegisterClient")
 
-        <div class="row">
-            <!-- Nombre -->
-            <div class="input-field col s6">
-                <i class="material-icons prefix">person</i>
-                <input type="text" id="nombre">
-                <label for="nombre">Nombre Completo</label>
-            </div>
 
-            <!-- Documento -->
-            <div class="input-field col s6">
-                <i class="material-icons prefix">chrome_reader_mode</i>
-                <input type="text" id="documento">
-                <label for="documento">Documento de identidad</label>
-            </div>
-
-            <!-- Correo -->
-            <div class="input-field col s5">
-                <i class="material-icons prefix">mail</i>
-                <input type="text" id="correo">
-                <label for="correo">Correo</label>
-            </div>
-
-            <!-- Teléfono -->
-            <div class="input-field col s5">
-                <i class="material-icons prefix">perm_contact_calendar</i>
-                <input type="text" id="telefono">
-                <label for="telefono">Teléfono</label>
-            </div>
-
-            <!-- Select Estado -->
-            <div class="input-field col s2">
-                <select id="estado">
-                    <option value="1">Activo</option>
-                    <option value="0">Inactivo</option>
-                </select>
-                <label for="estado">Estado</label>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect red white-text btn-flat">Cancelar</a>
-        <a href="#!" class="modal-close waves-effect blue white-text btn-flat" onclick="RegistrarCliente()">Registrar</a>
-    </div>
-</div>
-
-<!-- Modal Editar Cliente -->
-<div id="modalEditCliente" class="modal">
-    <div class="modal-content">
-        <h4 class="blue-text">Editar Cliente</h4>
-
-        <input type="hidden" id="editIdCliente" />
-
-        <div class="row">
-            <div class="input-field col s6">
-                <i class="material-icons prefix">person</i>
-                <input type="text" id="editNombre">
-                <label for="editNombre">Nombre Completo</label>
-            </div>
-
-            <div class="input-field col s6">
-                <i class="material-icons prefix">chrome_reader_mode</i>
-                <input type="text" id="editDocumento" placeholder="(ej:001-1234567-8">
-                <label for="editDocumento">Documento de identidad)</label>
-            </div>
-
-            <div class="input-field col s5">
-                <i class="material-icons prefix">mail</i>
-                <input type="text" id="editCorreo">
-                <label for="editCorreo">Correo</label>
-            </div>
-
-            <div class="input-field col s5">
-                <i class="material-icons prefix">perm_contact_calendar</i>
-                <input type="text" id="editTelefono">
-                <label for="editTelefono">Teléfono</label>
-            </div>
-
-            <div class="input-field col s2">
-                <select id="editEstado">
-                    <option value="1">Activo</option>
-                    <option value="0">Inactivo</option>
-                </select>
-                <label for="editEstado">Estado</label>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect red white-text btn-flat">Cancelar</a>
-        <a href="#!" class="modal-close waves-effect blue white-text btn-flat" onclick="ActualizarCliente()">Guardar cambios</a>
-    </div>
-</div>
-
-<div id="TablaClientes"></div>
-
-<script src="~/Scripts/JS/generic.js"></script>
 <script>
-    var UrlShow = '@Url.Action("Index", "Cliente")';
-    var UrlInsert = '@Url.Action("Insert", "Cliente")';
-    var UrlSelectClient = '@Url.Action("SelectClientDocument", "Cliente")';
-    var UrlUpdate = '@Url.Action("Update", "Cliente")';
+    var URLSearchDocument = '@Url.Action("SelectClientDocument","Cliente")';
+    var URLGetClientById = '@Url.Action("GetClientById","Cliente")';
+
 </script>
-<script src="~/Scripts/JS/Clientes.js"></script>
+<script src="@Url.Content("~/Scripts/JS/Clientes.js")"></script>
+@Html.Partial("_ModalEditClient")
