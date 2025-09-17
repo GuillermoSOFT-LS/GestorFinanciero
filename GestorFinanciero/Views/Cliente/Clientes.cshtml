@@ -24,7 +24,7 @@
                 <th>Acciones</th>
             </tr>
         </thead>
-        <tbody class="white black-text">
+        <tbody id="clientesBody" class="white black-text">
             @foreach (var cliente in Model)
             {
                 <tr>
@@ -40,14 +40,11 @@
                     </td>
                     <td>@cliente.FechaRegistro</td>
                     <td class="accionesTabla">
-
                         <!-- Botón Editar -->
                         <a href="#modalEditCliente" class="modal-trigger blue-text"
                            onclick="cargarCliente(@cliente.IdCliente)">
                             <i class="material-icons">border_color</i>
                         </a>
-
-
                         <!-- Botón Eliminar -->
                         @using (Html.BeginForm("Remove", "Cliente", FormMethod.Post))
                         {
@@ -66,11 +63,11 @@
 
 @Html.Partial("_ModalRegisterClient")
 
-
 <script>
     var URLSearchDocument = '@Url.Action("SelectClientDocument","Cliente")';
     var URLGetClientById = '@Url.Action("GetClientById","Cliente")';
-
 </script>
+
 <script src="@Url.Content("~/Scripts/JS/Clientes.js")"></script>
+
 @Html.Partial("_ModalEditClient")
