@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidad;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,11 @@ namespace GestorFinanciero.Controllers
 {
     public class CuentaController : Controller
     {
-        // GET: Cuenta
+        CN_Cuenta OBJCuenta = new CN_Cuenta();
         public ActionResult Index()
         {
-            return View();
+            List<CE_CuentaBancaria> Lista = OBJCuenta.GetAllAccount();
+            return View(Lista);
         }
     }
 }

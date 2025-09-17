@@ -1,0 +1,69 @@
+﻿<div id="modalAddAccount" class="modal">
+    <div class="modal-content">
+        <h4 class="blue-text titleModals">Crear Cuenta</h4>
+
+        <!-- Buscar cliente -->
+        @using (Html.BeginForm("", "", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="input-field col s8">
+                    <input type="text" id="DocumentoBuscar" placeholder="Documento del cliente">
+                    <label for="DocumentoBuscar">Buscar cliente</label>
+                </div>
+                <div class="col s4" style="margin-top: 25px;">
+                    <button type="submit" class="btn blue waves-effect">
+                        <i class="material-icons left">search</i>Buscar
+                    </button>
+                </div>
+            </div>
+        }
+
+        <!-- Formulario de registro de cuenta -->
+        @using (Html.BeginForm("Insert", "Cliente", FormMethod.Post, new { id = "formInsertCliente" }))
+        {
+            <div class="row">
+                <!-- Propietario -->
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">person</i>
+                    <input type="text" id="NombreInsert" disabled name="Nombre" required>
+                    <label for="NombreInsert">Propietario</label>
+                </div>
+
+                <!-- Tipo de cuenta -->
+                <div class="input-field col s6">
+                    <select id="TipoCuenta" name="TipoCuenta">
+                        <option value="2">Débito</option>
+                        <option value="1">Crédito</option>
+                    </select>
+                    <label for="TipoCuenta">Tipo de cuenta</label>
+                </div>
+
+                <!-- Saldo -->
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">attach_money</i>
+                    <input type="number" step="0.01" id="SaldoInsert" name="Saldo">
+                    <label for="SaldoInsert">Saldo</label>
+                </div>
+
+                <!-- Estado -->
+                <div class="input-field col s6">
+                    <select id="Estado" name="Estado">
+                        <option value="2">Activa</option>
+                        <option value="1">Inactiva</option>
+                    </select>
+                    <label for="Estado">Estado</label>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect red white-text btn-flat">
+                    Cancelar
+                </a>
+                <button type="submit" class="waves-effect blue white-text btn-flat">
+                    Registrar
+                </button>
+            </div>
+        }
+    </div>
+</div>

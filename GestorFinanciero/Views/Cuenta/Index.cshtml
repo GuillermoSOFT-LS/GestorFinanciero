@@ -1,56 +1,56 @@
-﻿@model List<Entidad.CE_Cliente>
+﻿@model List<Entidad.CE_CuentaBancaria>
 
-<h2 class="blue-text">Clientes</h2>
+<h2 class="blue-text">Cuentas</h2>
 
 <div class="col s4 left-align">
-    <button data-target="modalCliente" class="btn modal-trigger blue">
+    <button data-target="modalAddAccount" class="btn modal-trigger blue">
         <i class="material-icons left">person_add</i> Nuevo Cliente
     </button>
 </div>
 
-@Html.Partial("_FilterCliente")
+@Html.Partial("_FilterClientAccount")
 
 <div id="TablaClientes">
     <table class="highlight responsive-table">
         <thead class="blue white-text tableHead">
             <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Documento</th>
-                <th>Correo</th>
-                <th>Telefono</th>
+                <th>ID Cuenta</th>
+                <th>Propietario</th>
+                <th>Tipo Cuenta</th>
+                <th>NO Cuenta</th>
+                <th>Saldo</th>
                 <th>Estado</th>
                 <th>Fecha Registro</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody id="clientesBody" class="white black-text">
-            @foreach (var cliente in Model)
+            @foreach (var cuenta in Model)
             {
                 <tr>
-                    <td>@cliente.IdCliente</td>
-                    <td>@cliente.Nombre</td>
-                    <td>@cliente.Documento</td>
-                    <td>@cliente.Correo</td>
-                    <td>@cliente.Telefono</td>
+                    <td>@cuenta.IdCuenta</td>
+                    <td>@cuenta.Propietario</td>
+                    <td>@cuenta.TipoCuenta</td>
+                    <td>@cuenta.NumeroCuenta</td>
+                    <td>@cuenta.Saldo</td>
                     <td>
-                        @Html.Raw(cliente.Estado
+                        @Html.Raw(cuenta.Estado
                            ? "<span class='blue darken-1 white-text Bage'>Activo</span>"
                            : "<span class='red darken-4 white-text Bage'>Inactivo</span>")
                     </td>
-                    <td>@cliente.FechaRegistro.ToString("dd/MM/yyyy")</td>
+                    <td>@cuenta.FechaRegistro.ToString("dd/MM/yyyy")</td>
                     <td class="accionesTabla">
                         <!-- Botón Editar -->
                         <a href="#modalEditCliente" class="modal-trigger blue-text"
-                           onclick="cargarCliente(@cliente.IdCliente)">
+                           onclick="">
                             <i class="material-icons">border_color</i>
                         </a>
                         <!-- Botón Eliminar -->
                         @using (Html.BeginForm("Remove", "Cliente", FormMethod.Post))
                         {
-                            @Html.Hidden("id", cliente.IdCliente)
+                            @Html.Hidden("id", cuenta.IdCliente)
                             <button type="submit" class="btn-flat red-text"
-                                    onclick="return confirm(`Eliminar a @cliente.Nombre de la lista de clientes`);">
+                                    onclick="">
                                 <i style="font-size:24px;" class="material-icons">delete_forever</i>
                             </button>
                         }
@@ -60,14 +60,6 @@
         </tbody>
     </table>
 </div>
+<script src="~/Scripts/JS/Cuenta.js"></script>
 
-@Html.Partial("_ModalRegisterClient")
-
-<script>
-    var URLSearchDocument = '@Url.Action("SelectClientDocument","Cliente")';
-    var URLGetClientById = '@Url.Action("GetClientById","Cliente")';
-</script>
-
-<script src="@Url.Content("~/Scripts/JS/Clientes.js")"></script>
-
-@Html.Partial("_ModalEditClient")
+@Html.Partial("_ModalAddAccount")

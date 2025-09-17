@@ -1,6 +1,4 @@
-﻿// Scripts/JS/Clientes.js
-
-// Inicializaciones de Materialize
+﻿
 document.addEventListener('DOMContentLoaded', function () {
     var modals = document.querySelectorAll('.modal');
     M.Modal.init(modals);
@@ -9,9 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     M.FormSelect.init(selects);
 });
 
-// ---------------------------------------------------
-// FILTRADO COMBINADO (input + select)
-// ---------------------------------------------------
+
 (function () {
     const searchInput = document.getElementById('search');
     const filtroSelect = document.getElementById('Filtro');
@@ -19,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!searchInput || !filtroSelect || !tablaBody) return;
 
-    // Debounce helper
     function debounce(fn, delay) {
         let t;
         return function (...args) {
@@ -30,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function filterTable() {
         const query = (searchInput.value || '').trim().toLowerCase();
-        const estadoFilter = filtroSelect.value; // "2"=Todos, "1"=Activo, "0"=Inactivo
+        const estadoFilter = filtroSelect.value; 
 
         const rows = tablaBody.querySelectorAll('tr');
         let visibleCount = 0;

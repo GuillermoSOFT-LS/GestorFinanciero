@@ -48,7 +48,7 @@ namespace Datos
 
             return lista;
         }
-
+         
 
         public List<CE_Cliente> SearchClient(string Documento)
         {
