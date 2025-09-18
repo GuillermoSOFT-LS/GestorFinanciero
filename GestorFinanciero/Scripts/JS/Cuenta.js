@@ -1,21 +1,17 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-    var modals = document.querySelectorAll('.modal');
-    M.Modal.init(modals);
+    // Inicializar Materialize
+    M.Modal.init(document.querySelectorAll('.modal'));
+    M.FormSelect.init(document.querySelectorAll('select'));
 
-    var selects = document.querySelectorAll('select');
-    M.FormSelect.init(selects);
-
+    // Elementos
     const btnBuscar = document.getElementById("btnBuscarCliente");
     const inputDocumento = document.getElementById("DocumentoBuscar");
     const inputNombre = document.getElementById("NombreInsert");
     const inputIdCliente = document.getElementById("IdClienteInsert");
     const form = document.getElementById("formInsertCliente");
 
-    // Evitar listeners duplicados (por si se abre el modal varias veces)
-    btnBuscar.replaceWith(btnBuscar.cloneNode(true));
-    const newBtnBuscar = document.getElementById("btnBuscarCliente");
-
-    newBtnBuscar.addEventListener("click", function () {
+    // Buscar cliente
+    btnBuscar.addEventListener("click", function () {
         const documento = inputDocumento.value.trim();
 
         if (!documento) {
@@ -24,14 +20,11 @@
         }
 
         fetch('/Cuenta/SelectClientDocument?documento=' + encodeURIComponent(documento))
-            .then(response => {
-                if (!response.ok) throw new Error("Error HTTP " + response.status);
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 if (data && data.success) {
                     inputNombre.value = data.nombre;
-                    inputIdCliente.value = data.idCliente; 
+                    inputIdCliente.value = data.idCliente;
                     M.updateTextFields();
                     showAlert("Cliente encontrado: " + data.nombre, "success");
                 } else {
@@ -42,15 +35,16 @@
                 }
             })
             .catch(err => {
-                console.error("Error en fetch:", err);
+                console.error(err);
                 showAlert("Error al buscar cliente", "danger");
             });
     });
 
-    // Enviar formulario de inserción de cuenta
+    // Enviar formulario
     form.addEventListener("submit", function (e) {
         e.preventDefault();
 
+        // Validaciones
         if (!inputIdCliente.value) {
             showAlert("Debes buscar y seleccionar un cliente primero", "warning");
             return;
@@ -71,6 +65,7 @@
             return;
         }
 
+        // Enviar form data directamente
         const formData = new FormData(form);
 
         fetch('/Cuenta/Insert', {

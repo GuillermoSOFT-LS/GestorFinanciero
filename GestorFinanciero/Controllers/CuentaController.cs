@@ -23,7 +23,7 @@ namespace GestorFinanciero.Controllers
 
             if (cliente != null)
             {
-                return Json(new { success = true, nombre = cliente.Nombre }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, idCliente = cliente.IdCliente, nombre = cliente.Nombre }, JsonRequestBehavior.AllowGet);
             }
             else
             {
