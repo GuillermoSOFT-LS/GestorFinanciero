@@ -15,5 +15,20 @@ namespace GestorFinanciero.Controllers
             List<CE_CuentaBancaria> Lista = OBJCuenta.GetAllAccount();
             return View(Lista);
         }
+
+        [HttpGet]
+        public JsonResult SelectClientDocument(string documento)
+        {
+            CE_Cliente cliente = OBJCuenta.BuscarClientePorDocumento(documento);
+
+            if (cliente != null)
+            {
+                return Json(new { success = true, nombre = cliente.Nombre }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

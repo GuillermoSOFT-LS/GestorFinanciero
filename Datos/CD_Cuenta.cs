@@ -50,7 +50,45 @@ namespace Datos
 
             return lista;
         }
-        public string InsertarCuenta(CE_CuentaBancaria cuenta, string connectionString)
+
+
+
+        public CE_Cliente GetClienteByDocumento(string documento)
+        {
+            CE_Cliente cliente = null;
+
+            using (SqlConnection sqlcon = new SqlConnection(ConnectionDB.conn))
+            {
+                using (SqlCommand cmd = new SqlCommand("SP_SELECT_CLIENTE_BY_DOCUMENTO", sqlcon))
+                {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Documento", documento);
+
+                sqlcon.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    cliente = new CE_Cliente
+                    {
+                        IdCliente = Convert.ToInt32(dr["IdCliente"]),
+                        Nombre = dr["Nombre"].ToString()
+                    };
+                }
+
+                    sqlcon.Close();
+            }
+
+                return cliente;
+            }
+              
+        }
+
+
+
+
+
+        public string InsertarCuenta(CE_CuentaBancaria cuenta)
         {
             string numeroGenerado = string.Empty;
 

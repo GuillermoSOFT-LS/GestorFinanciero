@@ -2,21 +2,21 @@
     <div class="modal-content">
         <h4 class="blue-text titleModals">Crear Cuenta</h4>
 
+        <div id="alertContainer"></div>
+
+
         <!-- Buscar cliente -->
-        @using (Html.BeginForm("", "", FormMethod.Post))
-        {
-            <div class="row">
-                <div class="input-field col s8">
-                    <input type="text" id="DocumentoBuscar" placeholder="Documento del cliente">
-                    <label for="DocumentoBuscar">Buscar cliente</label>
-                </div>
-                <div class="col s4" style="margin-top: 25px;">
-                    <button type="submit" class="btn blue waves-effect">
-                        <i class="material-icons left">search</i>Buscar
-                    </button>
-                </div>
+        <div class="row">
+            <div class="input-field col s8">
+                <input type="text" id="DocumentoBuscar" placeholder="Documento del cliente">
+                <label for="DocumentoBuscar">Buscar cliente</label>
             </div>
-        }
+            <div class="col s4" style="margin-top: 25px;">
+                <button type="button" id="btnBuscarCliente" class="btn blue waves-effect">
+                    <i class="material-icons left">search</i>Buscar
+                </button>
+            </div>
+        </div>
 
         <!-- Formulario de registro de cuenta -->
         @using (Html.BeginForm("Insert", "Cliente", FormMethod.Post, new { id = "formInsertCliente" }))
@@ -25,7 +25,7 @@
                 <!-- Propietario -->
                 <div class="input-field col s6">
                     <i class="material-icons prefix">person</i>
-                    <input type="text" id="NombreInsert" disabled name="Nombre" required>
+                    <input type="text" id="NombreInsert" readonly name="Nombre" required>
                     <label for="NombreInsert">Propietario</label>
                 </div>
 
@@ -61,7 +61,7 @@
                     Cancelar
                 </a>
                 <button type="submit" class="waves-effect blue white-text btn-flat">
-                    Registrar
+                    Crear Cuenta
                 </button>
             </div>
         }

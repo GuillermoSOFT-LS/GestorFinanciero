@@ -4,7 +4,7 @@
 
 <div class="col s4 left-align">
     <button data-target="modalAddAccount" class="btn modal-trigger blue">
-        <i class="material-icons left">person_add</i> Nuevo Cliente
+        <i class="material-icons left">person_add</i> Nuevo Cuenta
     </button>
 </div>
 
@@ -60,6 +60,9 @@
         </tbody>
     </table>
 </div>
+<script>
+    var UrlSearchClient = '@Url.Action("SelectClientDocument", "Cuenta")';
+</script>
 <script src="~/Scripts/JS/Cuenta.js"></script>
-
+<script src="~/Scripts/JS/genericjs/Alerts.js"></script>
 @Html.Partial("_ModalAddAccount")

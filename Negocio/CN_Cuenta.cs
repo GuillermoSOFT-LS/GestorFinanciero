@@ -17,10 +17,13 @@ namespace Entidad
         // Registrar una nueva cuenta bancaria
         public CE_CuentaBancaria RegistrarCuenta(CE_CuentaBancaria cuenta)
         {
-            // Llama al método de la capa de datos para insertar la cuenta
-            objCapaDato.InsertarCuenta(cuenta, null); // El connectionString lo usa directamente CD_Cuenta
-            // El NumeroCuenta ya queda asignado en la entidad
+            objCapaDato.InsertarCuenta(cuenta);
             return cuenta;
+        }
+
+        public CE_Cliente BuscarClientePorDocumento(string documento)
+        {
+            return objCapaDato.GetClienteByDocumento(documento);
         }
     }
 }
