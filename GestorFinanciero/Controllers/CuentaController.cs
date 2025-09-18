@@ -30,5 +30,36 @@ namespace GestorFinanciero.Controllers
                 return Json(new { success = false }, JsonRequestBehavior.AllowGet);
             }
         }
+
+
+        [HttpPost]
+        public JsonResult Insert(CE_CuentaBancaria model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errores = string.Join("<br/>", ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage));
+
+                return Json(new { success = false, message = errores });
+            }
+
+            try
+            {
+                CN_Cuenta negocio = new CN_Cuenta();
+                string numeroCuenta = negocio.InsertarCuentaBancaria(model);
+
+                return Json(new
+                {
+                    success = true,
+                    message = $"Cuenta registrada correctamente. Número de cuenta: {numeroCuenta}"
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
     }
 }

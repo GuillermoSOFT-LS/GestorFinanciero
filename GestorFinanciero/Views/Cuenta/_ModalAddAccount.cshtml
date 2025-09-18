@@ -21,6 +21,10 @@
         <!-- Formulario de registro de cuenta -->
         @using (Html.BeginForm("Insert", "Cliente", FormMethod.Post, new { id = "formInsertCliente" }))
         {
+
+            <input type="hidden" id="IdClienteInsert" name="IdCliente">
+
+
             <div class="row">
                 <!-- Propietario -->
                 <div class="input-field col s6">

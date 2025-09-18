@@ -1,5 +1,6 @@
 ﻿using Datos;
 using Entidad;
+using System;
 using System.Collections.Generic;
 
 namespace Entidad
@@ -14,16 +15,17 @@ namespace Entidad
             return objCapaDato.GetAllAccounts();
         }
 
-        // Registrar una nueva cuenta bancaria
-        public CE_CuentaBancaria RegistrarCuenta(CE_CuentaBancaria cuenta)
-        {
-            objCapaDato.InsertarCuenta(cuenta);
-            return cuenta;
-        }
-
         public CE_Cliente BuscarClientePorDocumento(string documento)
         {
             return objCapaDato.GetClienteByDocumento(documento);
+        }
+
+        public string InsertarCuentaBancaria(CE_CuentaBancaria cuenta)
+        {
+            if (string.IsNullOrWhiteSpace(cuenta.Propietario))
+                throw new Exception("El propietario no puede estar vacío");
+
+            return objCapaDato.InsertarCuenta(cuenta);
         }
     }
 }

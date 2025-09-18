@@ -38,13 +38,11 @@ namespace Datos
                             FechaRegistro = Convert.ToDateTime(sdr["FechaRegistro"])
                         });
                     }
-
                     sqlcon.Close();
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
 
@@ -83,10 +81,6 @@ namespace Datos
             }
               
         }
-
-
-
-
 
         public string InsertarCuenta(CE_CuentaBancaria cuenta)
         {
