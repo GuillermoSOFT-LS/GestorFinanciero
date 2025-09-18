@@ -19,7 +19,7 @@
             return;
         }
 
-        fetch('/Cuenta/SelectClientDocument?documento=' + encodeURIComponent(documento))
+        fetch(UrlSearchClient+'?documento='+encodeURIComponent(documento))
             .then(response => response.json())
             .then(data => {
                 if (data && data.success) {
@@ -57,11 +57,6 @@
 
         if (!form.Saldo.value || parseFloat(form.Saldo.value) < 0) {
             showAlert("Debes ingresar un saldo válido", "warning");
-            return;
-        }
-
-        if (!form.Estado.value) {
-            showAlert("Debes seleccionar el estado", "warning");
             return;
         }
 

@@ -19,7 +19,7 @@
         </div>
 
         <!-- Formulario de registro de cuenta -->
-        @using (Html.BeginForm("Insert", "Cliente", FormMethod.Post, new { id = "formInsertCliente" }))
+        @using (Html.BeginForm("Insert", "Cuenta", FormMethod.Post, new { id = "formInsertCliente" }))
         {
 
             <input type="hidden" id="IdClienteInsert" name="IdCliente">
@@ -29,7 +29,7 @@
                 <!-- Propietario -->
                 <div class="input-field col s6">
                     <i class="material-icons prefix">person</i>
-                    <input type="text" id="NombreInsert" readonly name="Nombre" required>
+                    <input type="text" id="NombreInsert" readonly>
                     <label for="NombreInsert">Propietario</label>
                 </div>
 
@@ -49,14 +49,6 @@
                     <label for="SaldoInsert">Saldo</label>
                 </div>
 
-                <!-- Estado -->
-                <div class="input-field col s6">
-                    <select id="Estado" name="Estado">
-                        <option value=true>Activa</option>
-                        <option value=false>Inactiva</option>
-                    </select>
-                    <label for="Estado">Estado</label>
-                </div>
             </div>
 
             <!-- Footer -->

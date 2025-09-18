@@ -90,12 +90,11 @@ namespace Datos
             {
                 using (SqlConnection sqlcon = new SqlConnection(ConnectionDB.conn))
                 {
-                    using (SqlCommand cmd = new SqlCommand("sp_InsertarCuentaBancaria", sqlcon))
+                    using (SqlCommand cmd = new SqlCommand("SP_INSERT_CUENTA_BANCARIA", sqlcon))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.Parameters.AddWithValue("@IdCliente", cuenta.IdCliente);
-                        cmd.Parameters.AddWithValue("@Propietario", cuenta.Propietario);
                         cmd.Parameters.AddWithValue("@TipoCuenta", cuenta.TipoCuenta);
                         cmd.Parameters.AddWithValue("@Saldo", cuenta.Saldo);
                         sqlcon.Open();

@@ -11,7 +11,6 @@ namespace Entidad
     {
         public int IdCuenta { get; set; }
         public int IdCliente { get; set; }
-        [Required(ErrorMessage = "El campo Propetario es requerido")]
         public string Propietario { get; set; }
         [Required(ErrorMessage = "El campo Tipo de Cuenta es requerido")]
         public string TipoCuenta { get; set; }

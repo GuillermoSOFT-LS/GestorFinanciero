@@ -22,9 +22,6 @@ namespace Entidad
 
         public string InsertarCuentaBancaria(CE_CuentaBancaria cuenta)
         {
-            if (string.IsNullOrWhiteSpace(cuenta.Propietario))
-                throw new Exception("El propietario no puede estar vacío");
-
             return objCapaDato.InsertarCuenta(cuenta);
         }
     }
